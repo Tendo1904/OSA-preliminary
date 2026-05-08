@@ -1,0 +1,3 @@
+[submodule "osa-benchmark"]
+	path = osa-benchmark
+	url = https://github.com/Tendo1904/osa-benchmark
