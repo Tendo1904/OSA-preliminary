@@ -308,7 +308,7 @@ class DocGen(object):
             "Preserve correct existing information and add missing details based on the source code.\n\n"
             "Guidelines:\n"
             "- Improve clarity and completeness without rewriting everything from scratch.\n"
-            "- Answer WHY the method does what it does when it is not obvious.\n"
+            "- Be specific and clear about the method's purpose and possible usages in a system based on a field-specific main idea if it can be vague for non-participant compliances.\n"
             "- If the original docstring contains only a description, add Args and Returns sections if needed.\n"
             "- Describe parameters without types.\n"
             "- Omit Returns section if the method does not return a value.\n"
