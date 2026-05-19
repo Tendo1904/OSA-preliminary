@@ -23,6 +23,7 @@ from osa_tool.operations.codebase.docstring_generation.docstring_transformer imp
 from osa_tool.operations.codebase.docstring_generation.osa_treesitter import (
     OSA_TreeSitter,
 )
+from osa_tool.operations.codebase.docstring_generation.insert.factory import AugmentorFactory
 from osa_tool.operations.codebase.docstring_generation.topology import (
     build_dependency_graph,
 )
@@ -715,13 +716,9 @@ class DocGen(object):
         if not docstrings:
             return {file: source_code}
 
-        module = cst.parse_module(source_code)
-        wrapper = cst.MetadataWrapper(module)
-        transformer = DocstringTransformer(docstrings, source_code.splitlines(True), module.default_indent)
-        new_module = wrapper.visit(transformer)
+        augmentor = AugmentorFactory.create(file)
 
-        # serialize the results to a dictionary
-        return {file: new_module.code}
+        return augmentor.augment(file, source_code, docstrings)
 
     async def _generate_docstrings_for_items(
         self, parsed_structure: dict, docstring_type: tuple | str, rate_limit: int = 10
